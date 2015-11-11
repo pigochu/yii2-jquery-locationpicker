@@ -52,7 +52,7 @@ Long.: <input type="text" id="us2-lon"/>
 
 
 <?php
-    echo \common\widgets\map\LocationPickerWidget::widget([
+    echo \pigolab\locationpicker\LocationPickerWidget::widget([
        'key' => 'abcabcabcabc ...',   // optional , Your can also put your google map api key
        'options' => [
             'style' => 'width: 100%; height: 400px'
@@ -74,4 +74,10 @@ Long.: <input type="text" id="us2-lon"/>
 ?>
 
 ```
+
+@TODO
+-----
+
+- CoordinatesInput : Use in ActiveForm and SearchBox overlay on Map Canvas 
+
 
