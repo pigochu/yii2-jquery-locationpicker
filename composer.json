@@ -1,0 +1,22 @@
+{
+    "name": "pigochu/yii2-jquery-locationpicker",
+    "description": "jquery location picker widget for yii2",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","locationpicker"],
+    "homepage": "https://github.com/pigochu/yii2-jquery-locationpicker",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pigo Chu",
+            "email": "pigochu@gmail.com"
+        }
+    ],
+    "require": {
+        "bower-asset/jquery-locationpicker-plugin" : ">=0.1.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "pigolab\\locationpicker\\": ""
+        }
+    }
+}
