@@ -26,11 +26,9 @@ class LocationPickerWidget extends \yii\base\Widget
             $this->options['id'] = $this->getId();
         }
 
-        if($this->key === null) {
-            throw new InvalidConfigException("Invalid value for the property 'key'.");
-        }
-
-        $url = 'http://maps.google.com/maps/api/js?sensor=false&libraries=places&key=' . $this->key;
+        $url  =  "//maps.googleapis.com/maps/api/js?" .http_build_query([
+            'key' => $this->key
+        ]);
         $this->view->registerJsFile($url, [
             'position' => View::POS_END
         ]); 
