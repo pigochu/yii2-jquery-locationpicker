@@ -12,7 +12,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require pigochu/yii2-jquery-locationpicker ">=0.0.1"
+php composer.phar require pigochu/yii2-jquery-locationpicker ">=0.0.2"
 ```
 
 or add
