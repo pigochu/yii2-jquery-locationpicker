@@ -10,7 +10,7 @@ use yii\web\JqueryAsset;
 
 
 /**
- * This is just an example.
+ * LocationPickerWidget
  */
 class LocationPickerWidget extends \yii\base\Widget
 {
@@ -33,8 +33,7 @@ class LocationPickerWidget extends \yii\base\Widget
         $url = 'http://maps.google.com/maps/api/js?sensor=false&libraries=places&key=' . $this->key;
         $this->view->registerJsFile($url, [
             'position' => View::POS_END
-        ]);
-        //$this->view->registerJs('http://maps.google.com/maps/api/js?sensor=true&libraries=places&key=' . $this->key , View::POS_END);       
+        ]); 
         LocationPickerAsset::register($this->view);
     }
 
