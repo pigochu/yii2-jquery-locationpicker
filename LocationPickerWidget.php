@@ -27,7 +27,8 @@ class LocationPickerWidget extends \yii\base\Widget
         }
 
         $url  =  "//maps.googleapis.com/maps/api/js?" .http_build_query([
-            'key' => $this->key
+            'key'       => $this->key ,
+            'libraries' => 'places'
         ]);
         $this->view->registerJsFile($url, [
             'position' => View::POS_END
@@ -70,7 +71,7 @@ class LocationPickerWidget extends \yii\base\Widget
         }
     }
     public function run()
-    {       
+    {
         echo Html::tag('div','',$this->options);
         $this->registerClientOptions('locationpicker', $this->getId());
         $this->registerClientEvents('locationpicker', $this->getId());
