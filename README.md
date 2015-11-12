@@ -11,15 +11,15 @@ The preferred way to install this extension is through [composer](http://getcomp
 
 Either run
 
-```
+~~~
 php composer.phar require pigochu/yii2-jquery-locationpicker ">=0.1.0"
-```
+~~~
 
 or add
 
-```
+~~~
 "pigochu/yii2-jquery-locationpicker": ">=0.1.0"
-```
+~~~
 
 to the require section of your `composer.json` file.
 
@@ -27,16 +27,16 @@ to the require section of your `composer.json` file.
 Basic Usage for Test
 --------------------
 
-```
+~~~php
 <?= \pigolab\locationpicker\LocationPickerWidget::widget(); ?>
-```
+~~~
 
 Binding UI with the widget
 --------------------------
 
 This sample is transformed via [http://logicify.github.io/jquery-locationpicker-plugin/#usage](http://logicify.github.io/jquery-locationpicker-plugin/#usage)
 
-```
+~~~php
 <?php
 use yii\web\JsExpression;
 ?>
@@ -73,7 +73,7 @@ Long.: <input type="text" id="us2-lon"/>
     ]);
 ?>
 
-```
+~~~
 
 CoordinatesPicker
 -----------------
@@ -87,7 +87,7 @@ CoordinatesPicker let you get coordinates in ActiveForm , In addition I implemen
 
 Example :
 
-~~~
+~~~php
 <?php
 	echo $form->field($model, 'coordinates')->widget('\pigolab\locationpicker\CoordinatesPicker' , [
 		'key' => 'abcabcabc...' ,	// optional , Your can also put your google map api key
