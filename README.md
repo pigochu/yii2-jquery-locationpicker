@@ -53,9 +53,9 @@ Long.: <input type="text" id="us2-lon"/>
 
 <?php
     echo \pigolab\locationpicker\LocationPickerWidget::widget([
-       'key' => 'abcabcabcabc ...',   // optional , Your can also put your google map api key
+       'key' => 'abcabcabcabc ...',	// optional , Your can also put your google map api key
        'options' => [
-            'style' => 'width: 100%; height: 400px'
+            'style' => 'width: 100%; height: 400px', // map canvas width and height
         ] ,
         'clientOptions' => [
             'location' => [
@@ -75,9 +75,36 @@ Long.: <input type="text" id="us2-lon"/>
 
 ```
 
-@TODO
------
+CoordinatesPicker
+-----------------
 
-- CoordinatesInput : Use in ActiveForm and SearchBox overlay on Map Canvas 
+CoordinatesPicker let you get coordinates in ActiveForm , In addition I implemented some features not in original jquery-locationpicker-plugin : 
 
+ - enable/disable search box , search box will overlay on map
+ - enable/disable map type control
 
+ 
+
+Example :
+
+~~~
+<?php
+	echo $form->field($model, 'coordinates')->widget('\pigolab\locationpicker\CoordinatesPicker' , [
+		'key' => 'abcabcabc...' ,	// optional , Your can also put your google map api key
+		'valueTemplate' => '{latitude},{longitude}' , // Optional , this is default result format
+		'options' => [
+			'style' => 'width: 100%; height: 400px',  // map canvas width and height
+		] ,
+		'enableSearchBox => true , // Optional , default is true
+		'searchBoxOptions' => [ // searchBox html attributes
+			'style' => 'width: 300px;', // Optional , default width and height defined in css coordinates-picker.css
+		],
+		'enableMapTypeControl' => true , // Optional , default is true
+		'clientOptions' => [
+			'radius'    => 300,
+		]
+	]);
+?>
+~~~
+
+if you var_dump($model->coordinates) , You will get result like : 25.023308046766083,121.46041916878664 , so you can get latitude and longitude via explode(',' , $model->coordinates) .  
