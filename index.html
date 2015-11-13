@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Yii2-jquery-locationpicker by pigochu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Yii2-jquery-locationpicker</h1>
+      <h2 class="project-tagline">jquery location picker widget for yii2</h2>
+      <a href="https://github.com/pigochu/yii2-jquery-locationpicker" class="btn">View on GitHub</a>
+      <a href="https://github.com/pigochu/yii2-jquery-locationpicker/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/pigochu/yii2-jquery-locationpicker/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="jquery-location-picker-widget-for-yii2" class="anchor" href="#jquery-location-picker-widget-for-yii2" aria-hidden="true"><span class="octicon octicon-link"></span></a>jquery location picker widget for yii2</h1>
+
+<p>The widget implement <a href="https://github.com/Logicify/jquery-locationpicker-plugin">jquery-locationpicker-plugin
+</a></p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>The preferred way to install this extension is through <a href="http://getcomposer.org/download/">composer</a>.</p>
+
+<p>Either run</p>
+
+<pre><code>php composer.phar require pigochu/yii2-jquery-locationpicker "&gt;=0.1.0"
+</code></pre>
+
+<p>or add</p>
+
+<pre><code>"pigochu/yii2-jquery-locationpicker": "&gt;=0.1.0"
+</code></pre>
+
+<p>to the require section of your <code>composer.json</code> file.</p>
+
+<h2>
+<a id="basic-usage-for-test" class="anchor" href="#basic-usage-for-test" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Usage for Test</h2>
+
+<pre><code>&lt;?= \pigolab\locationpicker\LocationPickerWidget::widget(); ?&gt;
+</code></pre>
+
+<h2>
+<a id="binding-ui-with-the-widget" class="anchor" href="#binding-ui-with-the-widget" aria-hidden="true"><span class="octicon octicon-link"></span></a>Binding UI with the widget</h2>
+
+<p>This sample is transformed via <a href="http://logicify.github.io/jquery-locationpicker-plugin/#usage">http://logicify.github.io/jquery-locationpicker-plugin/#usage</a></p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">yii\web\JsExpression</span>;</span>
+<span class="pl-s1"></span><span class="pl-pse"><span class="pl-s1">?</span>&gt;</span>
+
+Location: &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>us2-address<span class="pl-pds">"</span></span> <span class="pl-e">style</span>=<span class="pl-s"><span class="pl-pds">"</span>width: 200px<span class="pl-pds">"</span></span>/&gt;
+&lt;<span class="pl-ent">br</span>&gt;
+Radius: &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>us2-radius<span class="pl-pds">"</span></span>/&gt;
+&lt;<span class="pl-ent">br</span>&gt;
+Lat.: &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>us2-lat<span class="pl-pds">"</span></span>/&gt;
+&lt;<span class="pl-ent">br</span>&gt;
+Long.: &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>us2-lon<span class="pl-pds">"</span></span>/&gt;
+&lt;<span class="pl-ent">br</span>&gt;
+
+
+<span class="pl-pse">&lt;?php</span><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-c1">\pigolab\locationpicker\</span><span class="pl-c1">LocationPickerWidget</span><span class="pl-k">::</span>widget([</span>
+<span class="pl-s1">       <span class="pl-s"><span class="pl-pds">'</span>key<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>abcabcabcabc ...<span class="pl-pds">'</span></span>, <span class="pl-c">// optional , Your can also put your google map api key</span></span>
+<span class="pl-s1">       <span class="pl-s"><span class="pl-pds">'</span>options<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>style<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>width: 100%; height: 400px<span class="pl-pds">'</span></span>, <span class="pl-c">// map canvas width and height</span></span>
+<span class="pl-s1">        ] ,</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>clientOptions<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>location<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>latitude<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-c1">46.15242437752303</span> ,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>longitude<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">2.7470703125</span>,</span>
+<span class="pl-s1">            ],</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>radius<span class="pl-pds">'</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-c1">300</span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>inputBinding<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>latitudeInput<span class="pl-pds">'</span></span>     <span class="pl-k">=&gt;</span> <span class="pl-k">new</span> <span class="pl-c1">JsExpression</span>(<span class="pl-s"><span class="pl-pds">"</span>$('#us2-lat')<span class="pl-pds">"</span></span>),</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>longitudeInput<span class="pl-pds">'</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-k">new</span> <span class="pl-c1">JsExpression</span>(<span class="pl-s"><span class="pl-pds">"</span>$('#us2-lon')<span class="pl-pds">"</span></span>),</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>radiusInput<span class="pl-pds">'</span></span>       <span class="pl-k">=&gt;</span> <span class="pl-k">new</span> <span class="pl-c1">JsExpression</span>(<span class="pl-s"><span class="pl-pds">"</span>$('#us2-radius')<span class="pl-pds">"</span></span>),</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>locationNameInput<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-k">new</span> <span class="pl-c1">JsExpression</span>(<span class="pl-s"><span class="pl-pds">"</span>$('#us2-address')<span class="pl-pds">"</span></span>)</span>
+<span class="pl-s1">            ]</span>
+<span class="pl-s1">        ]        </span>
+<span class="pl-s1">    ]);</span>
+<span class="pl-s1"></span><span class="pl-pse"><span class="pl-s1">?</span>&gt;</span>
+</pre></div>
+
+<h2>
+<a id="coordinatespicker" class="anchor" href="#coordinatespicker" aria-hidden="true"><span class="octicon octicon-link"></span></a>CoordinatesPicker</h2>
+
+<p>CoordinatesPicker let you get coordinates in ActiveForm , In addition I implemented some features not in original jquery-locationpicker-plugin : </p>
+
+<ul>
+<li>enable/disable search box , search box will overlay on map</li>
+<li>enable/disable map type control</li>
+</ul>
+
+<p>Example :</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-smi">$form</span><span class="pl-k">-&gt;</span>field(<span class="pl-smi">$model</span>, <span class="pl-s"><span class="pl-pds">'</span>coordinates<span class="pl-pds">'</span></span>)<span class="pl-k">-&gt;</span>widget(<span class="pl-s"><span class="pl-pds">'</span>\pigolab\locationpicker\CoordinatesPicker<span class="pl-pds">'</span></span> , [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>key<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>abcabcabc...<span class="pl-pds">'</span></span> ,   <span class="pl-c">// optional , Your can also put your google map api key</span></span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>valueTemplate<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>{latitude},{longitude}<span class="pl-pds">'</span></span> , <span class="pl-c">// Optional , this is default result format</span></span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>options<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>style<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>width: 100%; height: 400px<span class="pl-pds">'</span></span>,  <span class="pl-c">// map canvas width and height</span></span>
+<span class="pl-s1">        ] ,</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>enableSearchBox =&gt; true , // Optional , default is true</span></span>
+<span class="pl-s1"><span class="pl-s">        <span class="pl-pds">'</span></span><span class="pl-c1">searchBoxOptions</span><span class="pl-s"><span class="pl-pds">'</span> =&gt; [ // searchBox html attributes</span></span>
+<span class="pl-s1"><span class="pl-s">            <span class="pl-pds">'</span></span><span class="pl-c1">style</span><span class="pl-s"><span class="pl-pds">'</span> =&gt; <span class="pl-pds">'</span></span><span class="pl-c1">width</span>: 300<span class="pl-c1">px</span>;<span class="pl-s"><span class="pl-pds">'</span>, // Optional , default width and height defined in css coordinates-picker.css</span></span>
+<span class="pl-s1"><span class="pl-s">        ],</span></span>
+<span class="pl-s1"><span class="pl-s">        <span class="pl-pds">'</span></span><span class="pl-c1">enableMapTypeControl</span><span class="pl-s"><span class="pl-pds">'</span> =&gt; true , // Optional , default is true</span></span>
+<span class="pl-s1"><span class="pl-s">        <span class="pl-pds">'</span></span><span class="pl-c1">clientOptions</span><span class="pl-s"><span class="pl-pds">'</span> =&gt; [</span></span>
+<span class="pl-s1"><span class="pl-s">            <span class="pl-pds">'</span></span><span class="pl-c1">radius</span><span class="pl-s"><span class="pl-pds">'</span>    =&gt; 300,</span></span>
+<span class="pl-s1"><span class="pl-s">        ]</span></span>
+<span class="pl-s1"><span class="pl-s">    ]);</span></span>
+<span class="pl-s1"><span class="pl-s">?&gt;</span></span></pre></div>
+
+<p>if you var_dump($model-&gt;coordinates) , You will get result like : 25.023308046766083,121.46041916878664 , so you can get latitude and longitude via explode(',' , $model-&gt;coordinates) .  </p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/pigochu/yii2-jquery-locationpicker">Yii2-jquery-locationpicker</a> is maintained by <a href="https://github.com/pigochu">pigochu</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
