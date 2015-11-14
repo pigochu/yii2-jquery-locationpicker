@@ -1,6 +1,11 @@
 phpdevserver Change Log
 ========================
 
+0.1.1 2015-11-14
+------------------
+
+ - Fixed #1 : "defined variable" can not use in Class property less than PHP 5.6
+
 0.1.0 2015-11-12
 ------------------
  - Add CoordinatesPicker widget
