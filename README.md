@@ -95,7 +95,7 @@ Example :
 		'options' => [
 			'style' => 'width: 100%; height: 400px',  // map canvas width and height
 		] ,
-		'enableSearchBox => true , // Optional , default is true
+		'enableSearchBox' => true , // Optional , default is true
 		'searchBoxOptions' => [ // searchBox html attributes
 			'style' => 'width: 300px;', // Optional , default width and height defined in css coordinates-picker.css
 		],
