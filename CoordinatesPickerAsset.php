@@ -9,8 +9,11 @@ use yii\base\InvalidConfigException;
  */
 class CoordinatesPickerAsset extends \yii\web\AssetBundle
 {
-    public $sourcePath = __DIR__ . "/assets";
     public $css = [
         'coordinates-picker.css'
     ];
+    public function init() {
+        parent::init();
+        $this->setSourcePath(__DIR__ . '/assets');
+    }
 }
