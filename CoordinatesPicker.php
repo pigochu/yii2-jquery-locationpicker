@@ -92,23 +92,18 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
         if($latitudeIndex === false || $longitudeIndex === false) {
             throw new InvalidConfigException('Property "valueTemplate" is invalid.');
         }
-        
-        if($latitudeIndex < $longitudeIndex) {
-            $latitudeIndex  = 1;
-            $longitudeIndex = 2;
-        } else {
-            $latitudeIndex  = 2;
-            $longitudeIndex = 1;
-        }
-        $pattern = '/' . str_replace(['{latitude}' , '{longitude}'] , '(\d+(?:\.\d+))' , $this->valueTemplate) . '/';
 
-        preg_match_all($pattern, $coordinates, $matches);
-        $latitude = floatval($matches[$latitudeIndex][0]);
-        $longitude = floatval($matches[$longitudeIndex][0]);
+        $pattern = '/' . strtr($this->valueTemplate , [
+            '{latitude}' =>  '(?P<latitude>.*)' ,
+            '{longitude}' => '(?P<longitude>.*)'
+         ]). '/';
+
+        
+        preg_match_all($pattern, $coordinates, $matches , PREG_SET_ORDER);
 
         $this->clientOptions['location'] = [
-            'latitude' => $latitude,
-            'longitude' => $longitude,
+            'latitude' => floatval($matches[0]['latitude']),
+            'longitude' => floatval($matches[0]['longitude']),
         ];
     }
     
