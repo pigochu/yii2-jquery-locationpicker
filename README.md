@@ -107,4 +107,15 @@ Example :
 ?>
 ~~~
 
-if you var_dump($model->coordinates) , You will get result like : 25.023308046766083,121.46041916878664 , so you can get latitude and longitude via explode(',' , $model->coordinates) .  
+Get coordinates :
+
+Default valueTemplate is '{latitude},{longtitude} , So we will get resulit like : '25.023308046766083,121.46041916878664'
+
+We can convert it via explode() :
+
+~~~php
+<?php
+list($latitude,$longtitude) = explode(',' , $model->coordinates);
+?>
+~~~
+
