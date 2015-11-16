@@ -148,20 +148,37 @@ class TempModel extends Model
 ?>
 ~~~
 
+
+
 In your controller and view , you need do something
 
 - create TempModel as $model2 then pass to view
 - create hidden fields for latitude and longitude in view.
 - define clientOptions['inputBinding'] of CoordinatesPicker.
 
-this code looks like:
+Controller's code
+
+~~~php
+public function actionXXX($yourId) {
+    $model = YourOriginalModel::findOne($yourId);
+    $model2 = new TempModel();
+    $model2->coordinates = $model->latitude . "," . $model->longitude;
+    return $this->render('XXX' , [
+        'model' => $model ,
+        'model2' => $model2,
+    ]);
+}
+
+~~~
+
+View's code:
 
 ~~~php
     <?php
 		// $model is your original Model
 	 	echo $form->field($model, 'latitude')->hiddenInput()->label(false);
 	 	echo $form->field($model, 'longitude')->hiddenInput()->label(false);
-		// $model2 is your TempModel
+		// $model2 is TempModel
         echo $form->field($model2, 'coordinates')->widget('\pigolab\locationpicker\CoordinatesPicker' , [
 			// ... your other setting
             'clientOptions' => [
@@ -171,7 +188,7 @@ this code looks like:
                     'longitudeInput'    => new JsExpression("$('#"  .Html::getInputId($model, "longitude").  "')"),
 				]
             ]
-        ])->label('走失或拾獲的大約地區');
+        ])->label('coordinates');
 ~~~
 
 
