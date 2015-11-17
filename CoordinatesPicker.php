@@ -180,6 +180,7 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
                               . "jQuery('#" .$id. "').val(_t.replace('{latitude}',_l.latitude ).replace('{longitude}',_l.longitude));";
         }
         if($this->enableSearchBox) {
+            $onInitializedJS .= "jQuery('#{$searchBoxId}').show();\n";
             $onInitializedJS .= "_map.controls[google.maps.ControlPosition.TOP_LEFT].push(jQuery('#{$searchBoxId}').get(0));\n";
         }
                      
