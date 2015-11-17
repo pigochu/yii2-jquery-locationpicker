@@ -173,7 +173,12 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
         
         // function(c) = function(component)
         $onInitializedJS = "function(c) {\n" . "var _map = jQuery(c).locationpicker('map').map;\n";
-
+        if($this->model->attributes[$this->attribute] === null) {
+            // set hidden field value
+            $id = Html::getInputId($this->model, $this->attribute);
+            $onInitializedJS .= "var _t='" .$this->valueTemplate. "' , _l=$.fn.locationpicker.defaults.location;\n"
+                              . "jQuery('#" .$id. "').val(_t.replace('{latitude}',_l.latitude ).replace('{longitude}',_l.longitude));";
+        }
         if($this->enableSearchBox) {
             $onInitializedJS .= "_map.controls[google.maps.ControlPosition.TOP_LEFT].push(jQuery('#{$searchBoxId}').get(0));\n";
         }
@@ -181,7 +186,7 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
         if($this->enableMapTypeControl === true) {
             $onInitializedJS .= "_map.setOptions({mapTypeControl: true});\n";
         }
-                     
+        
         // if clientOptions has "oninitialized" , convert it to anymouse function and call it
         if($onInitializedOldFunction instanceof JsExpression) {
             $onInitializedJS .= "(". $onInitializedOldFunction ."(c))\n" ;
