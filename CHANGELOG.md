@@ -4,7 +4,7 @@ phpdevserver Change Log
 0.1.2 2015-11-17
 ------------------
  - Fixed bug : if never moved picker on CoordinatesPicker , the ActiveField will lost value when submit
-
+ - Change searchbox default hidden , when map rendered then display
 
 0.1.1 2015-11-14
 ------------------
