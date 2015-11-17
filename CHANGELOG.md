@@ -1,6 +1,11 @@
 phpdevserver Change Log
 ========================
 
+0.1.2 2015-11-17
+------------------
+ - Fixed bug : if never moved picker on CoordinatesPicker , the ActiveField will lost value when submit
+
+
 0.1.1 2015-11-14
 ------------------
 
