@@ -1,6 +1,11 @@
 phpdevserver Change Log
 ========================
 
+0.1.3 2015-12-01
+------------------
+ - Fixed bug: CoordinatesPicker Undefined offset: 0 when coordinates is empty string
+
+
 0.1.2 2015-11-17
 ------------------
  - Fixed bug : if never moved picker on CoordinatesPicker , the ActiveField will lost value when submit
