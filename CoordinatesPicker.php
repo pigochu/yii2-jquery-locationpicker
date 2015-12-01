@@ -82,7 +82,7 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
         // var_dump($this->model);
         
         $coordinates = $this->model->attributes[$this->attribute];
-        if($coordinates === null) {
+        if($coordinates === null || empty($coordinates)) {
             return;
         }
  
