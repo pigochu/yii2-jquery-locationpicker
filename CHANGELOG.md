@@ -1,6 +1,16 @@
 phpdevserver Change Log
 ========================
 
+0.1.5 2015-12-21
+-----------------
+ - Fixed bug : CoordinatesPicker can not use 'this' object in "onchanged" and "oninitialized" event
+
+
+0.1.4
+-----------------
+ - I don't know why has this version ....
+
+
 0.1.3 2015-12-01
 ------------------
  - Fixed bug: CoordinatesPicker Undefined offset: 0 when coordinates is empty string
