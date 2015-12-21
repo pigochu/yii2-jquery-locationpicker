@@ -137,21 +137,24 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
     }
     
     private function _registerOnChangedEvent($attributeId) {
-        $onchangedOldFunction = null;
+
+        $onchangedDefaultFunction = null;
         if(isset($this->clientOptions['onchanged'])) {
-            $onchangedOldFunction = $this->clientOptions['onchanged'];
+            $onchangedDefaultFunction = $this->clientOptions['onchanged'];
         }
         
         // function(c,r,i) = function(currentLocation, radius, isMarkerDropped)
-        $onChangedJS = "function(c,r,i) {"
-                     . "var _t='" .$this->valueTemplate. "';"
-                     . "jQuery('#" .$attributeId. "').val(_t.replace('{latitude}',c.latitude ).replace('{longitude}',c.longitude));";
+        $onChangedJS = "function(c,r,i) { (function() {\n"
+                     . "var _t='" .$this->valueTemplate. "';\n"
+                     . "jQuery('#" .$attributeId. "').val(_t.replace('{latitude}',c.latitude ).replace('{longitude}',c.longitude));\n"
+                     . "})();\n";
 
-        // if clientOptions has "onchaged" , convert it to anymouse function and call it
-        if($onchangedOldFunction instanceof JsExpression) {
-            $onChangedJS .= "(". $onchangedOldFunction ."(c,r,i))\n" ;
+        // call the default onchanged function
+        if($onchangedDefaultFunction instanceof JsExpression) {
+            $onChangedJS .= "var _fn = " .$onchangedDefaultFunction . "\n";
+            $onChangedJS .= "_fn.call(this,arguments);\n";
         }
-        $onChangedJS .= "\n}";
+        $onChangedJS .= "}";
 
         $this->clientOptions['onchanged'] = new JsExpression($onChangedJS);
     }
@@ -166,13 +169,17 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
             $searchBoxId = $this->searchBoxOptions['id'];
         }
         
-        $onInitializedOldFunction = null;
+        $onInitializedDefaultFunction = null;
         if(isset($this->clientOptions['oninitialized'])) {
-            $onInitializedOldFunction = $this->clientOptions['oninitialized'];
+            $onInitializedDefaultFunction = $this->clientOptions['oninitialized'];
         }
         
         // function(c) = function(component)
-        $onInitializedJS = "function(c) {\n" . "var _map = jQuery(c).locationpicker('map').map;\n";
+        $onInitializedJS = "function(c) {(function(){\n"
+                         . "var _map = jQuery(c).locationpicker('map').map;\n";
+        
+        
+        
         if($this->model->attributes[$this->attribute] === null) {
             // set hidden field value
             $id = Html::getInputId($this->model, $this->attribute);
@@ -188,11 +195,14 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
             $onInitializedJS .= "_map.setOptions({mapTypeControl: true});\n";
         }
         
-        // if clientOptions has "oninitialized" , convert it to anymouse function and call it
-        if($onInitializedOldFunction instanceof JsExpression) {
-            $onInitializedJS .= "(". $onInitializedOldFunction ."(c))\n" ;
+        $onInitializedJS .= "})();\n";
+
+        // call the default oninitialized function
+        if($onInitializedDefaultFunction instanceof JsExpression) {
+            $onInitializedJS .= "var _fn = " .$onInitializedDefaultFunction . "\n";
+            $onInitializedJS .= "_fn.call(this,arguments);\n";
         }
-        $onInitializedJS .= "\n}";
+        $onInitializedJS .= "}";
 
         $this->clientOptions['oninitialized'] = new JsExpression($onInitializedJS);
     }
