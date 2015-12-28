@@ -12,13 +12,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ~~~
-php composer.phar require pigochu/yii2-jquery-locationpicker ">=0.1.2"
+php composer.phar require pigochu/yii2-jquery-locationpicker ">=0.2.0"
 ~~~
 
 or add
 
 ~~~
-"pigochu/yii2-jquery-locationpicker": ">=0.1.2"
+"pigochu/yii2-jquery-locationpicker": ">=0.2.0"
 ~~~
 
 to the require section of your `composer.json` file.
@@ -81,9 +81,11 @@ CoordinatesPicker
 CoordinatesPicker let you get coordinates in ActiveForm , In addition I implemented some features not in original jquery-locationpicker-plugin : 
 
  - enable/disable search box , search box will overlay on map
- - enable/disable map type control
+ - enable/disable all googlemap's control
 
- 
+
+![](https://i.imgur.com/SyNOXXL.png)
+
 
 Example :
 
@@ -99,8 +101,19 @@ Example :
 		'searchBoxOptions' => [ // searchBox html attributes
 			'style' => 'width: 300px;', // Optional , default width and height defined in css coordinates-picker.css
 		],
-		'enableMapTypeControl' => true , // Optional , default is true
+		'searchBoxPosition' => new JsExpression('google.maps.ControlPosition.TOP_LEFT'), // optional , default is TOP_LEFT
+		'mapOptions' => [
+			// google map options
+			// visit https://developers.google.com/maps/documentation/javascript/controls for other options
+            'mapTypeControl' => true, // Enable Map Type Control
+            'mapTypeControlOptions' => [
+                  'style'    => new JsExpression('google.maps.MapTypeControlStyle.HORIZONTAL_BAR'),
+                  'position' => new JsExpression('google.maps.ControlPosition.TOP_LEFT'),
+			]
+            'streetViewControl' => true, // Enable Street View Control
+        ],
 		'clientOptions' => [
+			// jquery-location-picker options
 			'radius'    => 300,
 		]
 	]);
@@ -118,6 +131,43 @@ We can convert it via explode() :
 list($latitude,$longtitude) = explode(',' , $model->coordinates);
 ?>
 ~~~
+
+Deprecated options : enableMapTypeControl
+-----------------------------------------
+
+Since version 0.2.0 , don't use 'enableMapTypeControl' , I added 'mapOptions' for set googlemap options.
+You can enable/disable all controlls or set control's style , position now.
+
+Example : enable rotateControl , streetViewControl , mapTypeControl and set style/position
+
+~~~php
+<?php
+   echo $form->field($model, 'coordinates')->widget('\pigolab\locationpicker\CoordinatesPicker' , [
+
+        'clientOptions' => [ 'zoom : 20 ], // rotateControl will display when zoom is 20
+        // .... other options ...
+		'mapOptions' => [
+			// set google map optinos
+			'rotateControl' => true,
+			'scaleControl' => false,
+			'streetViewControl' => true,
+			'mapTypeId' => new JsExpression('google.maps.MapTypeId.SATELLITE'),
+			'heading'=> 90,
+            'tilt' => 45 ,
+                
+			'mapTypeControl' => true,
+            'mapTypeControlOptions' => [
+                  'style'    => new JsExpression('google.maps.MapTypeControlStyle.HORIZONTAL_BAR'),
+                  'position' => new JsExpression('google.maps.ControlPosition.TOP_CENTER'),
+			]
+		]
+   ]);
+?>
+~~~
+
+Please visit GoogleMaps Full Control document :
+https://developers.google.com/maps/documentation/javascript/controls
+
 
 
 Other DocumentS

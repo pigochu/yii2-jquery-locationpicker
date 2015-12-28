@@ -1,6 +1,14 @@
 phpdevserver Change Log
 ========================
 
+0.2.0 2015-12-28
+----------------
+ - CoordinatesPicker change
+   - 'enableMapTypeControl' is deprecated , please use 'mapOptions'
+   - if use 'enableMapTypeControl' , browser develop console will display warning message
+   - 'mapOptions' can set all gmap's control options
+   - add 'searchBoxPosition'
+
 0.1.5 2015-12-21
 -----------------
  - Fixed bug : CoordinatesPicker can not use 'this' object in "onchanged" and "oninitialized" event
