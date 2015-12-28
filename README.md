@@ -144,7 +144,7 @@ Example : enable rotateControl , streetViewControl , mapTypeControl and set styl
 <?php
    echo $form->field($model, 'coordinates')->widget('\pigolab\locationpicker\CoordinatesPicker' , [
 
-        'clientOptions' => [ 'zoom : 20 ], // rotateControl will display when zoom is 20
+        'clientOptions' => [ 'zoom' => 20 ], // rotateControl will display when zoom is 20
         // .... other options ...
 		'mapOptions' => [
 			// set google map optinos
