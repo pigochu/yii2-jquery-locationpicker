@@ -26,10 +26,41 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
     
     /** @var boolean enable search box overlay on map canvas */
     public $enableSearchBox = true;
+    
+    /** @var array */
     public $searchBoxOptions = [];
     
-    /** @var boolean */
+    /** @var string|\yii\web\JsExpression */
+    public $searchBoxPosition;
+    
+    /**
+     * Please use mapOptions
+     * 
+     * <pre>
+     * [
+     *     'mapOptions' => [
+     *         'mapTypeControl' => true,
+     *         'mapTypeControlOptions' => [
+     *             'style'    => new JsExpression('google.maps.MapTypeControlStyle.HORIZONTAL_BAR'),
+     *             'position' => new JsExpression('google.maps.ControlPosition.TOP_CENTER'),
+     *         ]
+     *     ]
+     * ]
+     * </pre>
+     * 
+     * @var boolean
+     * @deprecated since 0.2.0
+     * @see https://developers.google.com/maps/documentation/javascript/controls
+     */
     public $enableMapTypeControl = true;
+    
+    /**
+     * Google Map Options
+     * @var array
+     * @since 0.2.0
+     */
+    public $mapOptions = [];
+    
     
     /** @var map canvas html attribute */
     public $options = [];
@@ -187,12 +218,26 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
                               . "jQuery('#" .$id. "').val(_t.replace('{latitude}',_l.latitude ).replace('{longitude}',_l.longitude));";
         }
         if($this->enableSearchBox) {
+            
+            $position = new JsExpression('google.maps.ControlPosition.TOP_LEFT');
+            if($this->searchBoxPosition !== null) {
+                $position = $this->searchBoxPosition;
+            }
             $onInitializedJS .= "jQuery('#{$searchBoxId}').show();\n";
-            $onInitializedJS .= "_map.controls[google.maps.ControlPosition.TOP_LEFT].push(jQuery('#{$searchBoxId}').get(0));\n";
+            $onInitializedJS .= "_map.controls[{$position}].push(jQuery('#{$searchBoxId}').get(0));\n";
         }
                      
         if($this->enableMapTypeControl === true) {
-            $onInitializedJS .= "_map.setOptions({mapTypeControl: true});\n";
+
+            $onInitializedJS .= "console.warn('yii2-jquery-locationpicker : enableMapTypeControl is deprecated since 0.2.0 , we recommand use mapOptions to define google map options.')\n";
+            
+            if(!isset($this->mapOptions['mapTypeControl'])) {
+                $this->mapOptions['mapTypeControl'] = true;
+            }
+        }
+        
+        if(count($this->mapOptions)) {
+            $onInitializedJS .= "_map.setOptions(" . Json::htmlEncode($this->mapOptions) .  ");\n";
         }
         
         $onInitializedJS .= "})();\n";
