@@ -115,6 +115,7 @@ Example :
 		'clientOptions' => [
 			// jquery-location-picker options
 			'radius'    => 300,
+            'addressFormat' => 'street_number',
 		]
 	]);
 ?>
@@ -128,7 +129,7 @@ We can convert it via explode() :
 
 ~~~php
 <?php
-list($latitude,$longtitude) = explode(',' , $model->coordinates);
+list($latitude,$longitude) = explode(',' , $model->coordinates);
 ?>
 ~~~
 
