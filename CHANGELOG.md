@@ -1,10 +1,6 @@
 phpdevserver Change Log
 ========================
 
-0.2.1 2016-12-02
----------------
-  - Fixed bug : CoordinatesPicker can not set id
-
 0.2.0 2015-12-28
 ----------------
  - CoordinatesPicker change
