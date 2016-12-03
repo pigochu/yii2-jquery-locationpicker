@@ -1,5 +1,13 @@
 phpdevserver Change Log
 ========================
+0.2.2 2016-12-03
+ - Fixed bug : CoordinatesPicker attribute value lost
+ - remove version 0.2.1
+ - remove version 0.0.1~0.1.4
+
+0.2.1 2016-12-02
+---------------
+  - Fixed bug : CoordinatesPicker can not set id
 
 0.2.0 2015-12-28
 ----------------

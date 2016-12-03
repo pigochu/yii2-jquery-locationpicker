@@ -53,7 +53,7 @@ Long.: <input type="text" id="us2-lon"/>
 
 <?php
     echo \pigolab\locationpicker\LocationPickerWidget::widget([
-       'key' => 'abcabcabcabc ...',	// optional , Your can also put your google map api key
+       'key' => 'abcabcabcabc ...',	// require , Put your google map api key
        'options' => [
             'style' => 'width: 100%; height: 400px', // map canvas width and height
         ] ,
@@ -63,6 +63,7 @@ Long.: <input type="text" id="us2-lon"/>
                 'longitude' => 2.7470703125,
             ],
             'radius'    => 300,
+            'addressFormat' => 'street_number',
             'inputBinding' => [
                 'latitudeInput'     => new JsExpression("$('#us2-lat')"),
                 'longitudeInput'    => new JsExpression("$('#us2-lon')"),
@@ -92,7 +93,7 @@ Example :
 ~~~php
 <?php
 	echo $form->field($model, 'coordinates')->widget('\pigolab\locationpicker\CoordinatesPicker' , [
-		'key' => 'abcabcabc...' ,	// optional , Your can also put your google map api key
+		'key' => 'abcabcabc...' ,	// require , Put your google map api key
 		'valueTemplate' => '{latitude},{longitude}' , // Optional , this is default result format
 		'options' => [
 			'style' => 'width: 100%; height: 400px',  // map canvas width and height
@@ -109,12 +110,13 @@ Example :
             'mapTypeControlOptions' => [
                   'style'    => new JsExpression('google.maps.MapTypeControlStyle.HORIZONTAL_BAR'),
                   'position' => new JsExpression('google.maps.ControlPosition.TOP_LEFT'),
-			]
+			],
             'streetViewControl' => true, // Enable Street View Control
         ],
 		'clientOptions' => [
 			// jquery-location-picker options
 			'radius'    => 300,
+            'addressFormat' => 'street_number',
 		]
 	]);
 ?>
@@ -128,7 +130,7 @@ We can convert it via explode() :
 
 ~~~php
 <?php
-list($latitude,$longtitude) = explode(',' , $model->coordinates);
+list($latitude,$longitude) = explode(',' , $model->coordinates);
 ?>
 ~~~
 
@@ -144,7 +146,7 @@ Example : enable rotateControl , streetViewControl , mapTypeControl and set styl
 <?php
    echo $form->field($model, 'coordinates')->widget('\pigolab\locationpicker\CoordinatesPicker' , [
 
-        'clientOptions' => [ 'zoom : 20 ], // rotateControl will display when zoom is 20
+        'clientOptions' => [ 'zoom' => 20 ], // rotateControl will display when zoom is 20
         // .... other options ...
 		'mapOptions' => [
 			// set google map optinos
@@ -172,5 +174,5 @@ https://developers.google.com/maps/documentation/javascript/controls
 
 Other DocumentS
 ---------------
-- [CoordinatesPicker with two fields Model](doc\TWO-FIELDS-CONVERSION.md)
+- [CoordinatesPicker with two fields Model](doc/TWO-FIELDS-CONVERSION.md)
 - [How to use PHP trait do simple conversion MySQL Spatial Type between ActiveRecord](doc/MYSQL-SPATIAL-CONVERSION.md)

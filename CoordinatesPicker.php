@@ -71,48 +71,74 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
     
     public function init() {
         parent::init();
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = $this->getId();
-        }
         CoordinatesPickerAsset::register($this->view);
     }
 
     public function run()
     {
+        if($this->model === null) {
+            $inputId = $this->getId();
+        } else {
+            if($this->getId(false) === null) {
+                $inputId = Html::getInputId($this->model, $this->attribute);
+                $this->setId($inputId);
+            } else {
+                $inputId = $this->getId();
+            }
+            
+        }
+        $widgetId = $inputId . '-map';
+
+
+        if($this->name === null) {
+            $inputName = $this->model===null ? null: Html::getInputName($this->model, $this->attribute);
+        } else {
+            $inputName = $this->name;
+        }
+       
         if($this->enableSearchBox === true) {
             $this->_renderSearchBox();
         }
         
         // render attribute as hidden input
-        echo Html::activeHiddenInput(
-            $this->model,
-            $this->attribute
-        );
-        $attributeId = Html::getInputId($this->model, $this->attribute);
-        $this->_registerOnChangedEvent($attributeId);
+        if($this->model === null) {
+            echo Html::hiddenInput($inputName, $this->value , ['id'=> $inputId , 'name' => $inputName]);
+        } else {
+            echo Html::activeHiddenInput(
+                $this->model,
+                $this->attribute,
+                ['id'=> $inputId , 'name' => $inputName]
+            );
+        }
+        
+       
+        
+        $this->_registerOnChangedEvent($this->id);
         $this->_registerOnInitializedEvent();
 
         $this->_setClientLocation();
         
-        $widgetOptions = $this->options;
         
-        if(isset($widgetOptions['id'])) {
-            unset($widgetOptions['id']);
-        }
-
+        $widgetOptions = $this->options;
+        unset($widgetOptions['id']);
         echo LocationPickerWidget::widget([
+            'id'  => $widgetId,
             'key' => $this->key ,
             'options' => $widgetOptions,
             'clientOptions' => $this->clientOptions,
             'clientEvents'  => $this->clientEvents,
         ]);
+
     }
 
     private function _setClientLocation() {
         
-        // var_dump($this->model);
+        $coordinates = null;
+        if($this->model) {
+            $coordinates = Html::getAttributeValue($this->model, $this->attribute);
+        }
         
-        $coordinates = $this->model->attributes[$this->attribute];
+        // $coordinates = $this->model->attributes[$this->attribute];
         if($coordinates === null || empty($coordinates)) {
             return;
         }
@@ -211,9 +237,11 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
         
         
         
-        if($this->model->attributes[$this->attribute] === null) {
+        // if($this->model->attributes[$this->attribute] === null) {
+        if($this->value === null) {
             // set hidden field value
-            $id = Html::getInputId($this->model, $this->attribute);
+            // $id = Html::getInputId($this->model, $this->attribute);
+            $id = $this->getId();
             $onInitializedJS .= "var _t='" .$this->valueTemplate. "' , _l=$.fn.locationpicker.defaults.location;\n"
                               . "jQuery('#" .$id. "').val(_t.replace('{latitude}',_l.latitude ).replace('{longitude}',_l.longitude));";
         }
