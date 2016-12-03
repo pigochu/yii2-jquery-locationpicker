@@ -63,6 +63,7 @@ Long.: <input type="text" id="us2-lon"/>
                 'longitude' => 2.7470703125,
             ],
             'radius'    => 300,
+            'addressFormat' => 'street_number',
             'inputBinding' => [
                 'latitudeInput'     => new JsExpression("$('#us2-lat')"),
                 'longitudeInput'    => new JsExpression("$('#us2-lon')"),
@@ -173,5 +174,5 @@ https://developers.google.com/maps/documentation/javascript/controls
 
 Other DocumentS
 ---------------
-- [CoordinatesPicker with two fields Model](doc\TWO-FIELDS-CONVERSION.md)
+- [CoordinatesPicker with two fields Model](doc/TWO-FIELDS-CONVERSION.md)
 - [How to use PHP trait do simple conversion MySQL Spatial Type between ActiveRecord](doc/MYSQL-SPATIAL-CONVERSION.md)

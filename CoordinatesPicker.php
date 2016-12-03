@@ -76,7 +76,17 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
 
     public function run()
     {
-        $inputId = $this->getId();
+        if($this->model === null) {
+            $inputId = $this->getId();
+        } else {
+            if($this->getId(false) === null) {
+                $inputId = Html::getInputId($this->model, $this->attribute);
+                $this->setId($inputId);
+            } else {
+                $inputId = $this->getId();
+            }
+            
+        }
         $widgetId = $inputId . '-map';
 
 
@@ -123,8 +133,11 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
 
     private function _setClientLocation() {
         
-        // var_dump($this->model);
-        $coordinates = $this->value;
+        $coordinates = null;
+        if($this->model) {
+            $coordinates = Html::getAttributeValue($this->model, $this->attribute);
+        }
+        
         // $coordinates = $this->model->attributes[$this->attribute];
         if($coordinates === null || empty($coordinates)) {
             return;
