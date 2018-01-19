@@ -109,6 +109,7 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
                 $this->attribute,
                 ['id'=> $inputId , 'name' => $inputName]
             );
+            $this->value = $this->model->attributes[$this->attribute];
         }
         
        
@@ -238,9 +239,8 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
         
         
         // if($this->model->attributes[$this->attribute] === null) {
-        if($this->value === null) {
-            // set hidden field value
-            // $id = Html::getInputId($this->model, $this->attribute);
+        if(empty($this->value)) {
+            // set default hidden field value
             $id = $this->getId();
             $onInitializedJS .= "var _t='" .$this->valueTemplate. "' , _l=$.fn.locationpicker.defaults.location;\n"
                               . "jQuery('#" .$id. "').val(_t.replace('{latitude}',_l.latitude ).replace('{longitude}',_l.longitude));";

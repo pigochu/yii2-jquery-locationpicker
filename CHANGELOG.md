@@ -1,6 +1,12 @@
 phpdevserver Change Log
 ========================
+
+0.2.3 2018-01-20
+----------------
+ - Fixed bug  : Issue #13 , LocationPicker value lost on update
+
 0.2.2 2016-12-03
+----------------
  - Fixed bug : CoordinatesPicker attribute value lost
  - remove version 0.2.1
  - remove version 0.0.1~0.1.4
