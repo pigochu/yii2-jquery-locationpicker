@@ -109,7 +109,7 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
                 $this->attribute,
                 ['id'=> $inputId , 'name' => $inputName]
             );
-            $this->value = $this->model->attributes[$this->attribute];
+            $this->value = $this->model->{$this->attribute};
         }
         
        
