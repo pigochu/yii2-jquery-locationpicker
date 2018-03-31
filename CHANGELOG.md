@@ -1,6 +1,9 @@
 phpdevserver Change Log
 ========================
 
+0.2.5 2018-03-31
+ - Fixed bug : location option doesn't work in coordinate picker (issue #17)
+
 0.2.4 2018-02-24
  - CoordinatesPicker fix for virtual attributes , thanks @deathburger
 
