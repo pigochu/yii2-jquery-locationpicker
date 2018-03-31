@@ -237,9 +237,8 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
                          . "var _map = jQuery(c).locationpicker('map').map;\n";
         
         
-        
-        // if($this->model->attributes[$this->attribute] === null) {
-        if(empty($this->value)) {
+           
+        if(empty($this->value) && !isset($this->clientOptions['location'])) {
             // set default hidden field value
             $id = $this->getId();
             $onInitializedJS .= "var _t='" .$this->valueTemplate. "' , _l=$.fn.locationpicker.defaults.location;\n"
