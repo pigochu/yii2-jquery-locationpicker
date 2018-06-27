@@ -16,7 +16,6 @@ class LocationPickerWidget extends \yii\base\Widget
 {
     /** @var string google map api key */
     public $key;
-    public $language = 'en';
     public $options = [];
     public $clientOptions = [];
     public $clientEvents = [];
@@ -29,7 +28,6 @@ class LocationPickerWidget extends \yii\base\Widget
 
         $url  =  "//maps.googleapis.com/maps/api/js?" .http_build_query([
             'key'       => $this->key ,
-            'language'  => $this->language,
             'libraries' => 'places'
         ]);
         $this->view->registerJsFile($url, [
