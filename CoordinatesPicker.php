@@ -122,14 +122,18 @@ class CoordinatesPicker extends \yii\widgets\InputWidget
         
         $widgetOptions = $this->options;
         unset($widgetOptions['id']);
+        
+        $this->renderLocationPicker($widgetId, $widgetOptions);
+    }
+
+    protected function renderLocationPicker($widgetId, $widgetOptions) {
         echo LocationPickerWidget::widget([
             'id'  => $widgetId,
-            'key' => $this->key ,
+            'key' => $this->key,
             'options' => $widgetOptions,
             'clientOptions' => $this->clientOptions,
             'clientEvents'  => $this->clientEvents,
         ]);
-
     }
 
     private function _setClientLocation() {
